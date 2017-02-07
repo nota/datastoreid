@@ -4,7 +4,10 @@ module Datastoreid
     module Selectable
       def where(criterion = nil)
         if criterion.is_a? ::Hash
-          criterion.each_pair { |key, value| set_query(query.where(key.to_s, '=', value)) }
+          criterion.each_pair do |key, value|
+            key = parent_entry.original_properties_names[key] || key
+            set_query(query.where(key.to_s, '=', value))
+          end
         end
         self
       end

@@ -9,7 +9,7 @@ module Datastoreid
       end
 
       def all
-        Criteria.new(self)
+        where
       end
     end
   end

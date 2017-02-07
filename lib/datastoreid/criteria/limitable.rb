@@ -1,6 +1,6 @@
 module Datastoreid
   class Criteria
-    # Defines behaviour for find operations.
+    # Defines behaviour for limit and offset operations.
     module Limitable
       def limit(num)
         set_query(query.limit(num))

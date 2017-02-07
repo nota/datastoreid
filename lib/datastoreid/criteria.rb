@@ -5,7 +5,12 @@ require "datastoreid/criteria/limitable"
 require "datastoreid/criteria/sortable"
 
 module Datastoreid
-  # Inject behaviour for query operations.
+  # The +Criteria+ class is the core object needed in Datastoreid to retrieve
+  # objects from the database. It is a DSL that essentially sets up the
+  # selector and options arguments that get passed on to a Google::Datastore::V1::Query
+  # in the Ruby driver. Each method on the +Criteria+ returns self to they
+  # can be chained in order to create a readable criterion to be executed
+  # against the database.
   class Criteria
     include Findable
     include Queryable

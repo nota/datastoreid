@@ -1,6 +1,6 @@
 module Datastoreid
   class Criteria
-    # Defines behaviour for find operations.
+    # Defines behaviour for sort operations.
     module Sortable
       # order('user_id', :asc)
       # order('user_id', :desc)

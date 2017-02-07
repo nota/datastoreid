@@ -11,6 +11,10 @@ module Datastoreid
       def find_by(criterion = nil)
         Criteria.new(self).where(criterion).fetch_one
       end
+
+      def first
+        fetch_one query
+      end
     end
   end
 end

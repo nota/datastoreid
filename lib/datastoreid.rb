@@ -14,6 +14,7 @@ module Datastoreid
   require 'datastoreid/selectable'
   require 'datastoreid/findable'
   require 'datastoreid/queryable'
+  require 'datastoreid/config'
   require 'datastoreid/entity'
   require 'datastoreid/errors/datastore_error'
   require 'datastoreid/persistable'

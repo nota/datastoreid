@@ -54,7 +54,14 @@ module Datastoreid
 
     class_methods do
       def datastore
-        @datastore ||= Google::Cloud.new.datastore
+        if settings['project'] && settings['project'] != ''
+          # XXX: We can set EMULATOR_HOST only from environmental viriables so far
+          ENV['DATASTORE_EMULATOR_HOST'] = settings['project']
+        end
+
+        @datastore ||= Google::Cloud::Datastore.new(
+          project: settings['project']
+        )
       end
 
       def datastore_entity

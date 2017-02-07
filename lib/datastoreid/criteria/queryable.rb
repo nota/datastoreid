@@ -1,30 +1,27 @@
 module Datastoreid
-  module Criteria
+  class Criteria
     # Defines behaviour for query operations.
     module Queryable
-      extend ActiveSupport::Concern
+      def query
+        @query ||= datastore.query(kind)
+      end
 
-      class_methods do
-        def query
-          datastore.query(kind)
-        end
+      def set_query(query)
+        @query = query
+      end
 
-        def run(query)
-          result = datastore.run query
-          new(result.first) if result.count == 1
-        end
+      def fetch_one
+        parent_entry.fetch_one(query)
+      end
 
-        def fetch(query)
-          result = datastore.run query
-          if result.count > 0
-            result.map { |element| new(element) }
-          else
-            []
-          end
-        end
+      def fetch
+        parent_entry.fetch(query)
+      end
 
-        def all
-          fetch query
+      def each
+        @entries ||= fetch
+        @entries.each do |entry|
+          yield(entry)
         end
       end
     end

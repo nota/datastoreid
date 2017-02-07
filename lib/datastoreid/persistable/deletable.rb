@@ -5,7 +5,7 @@ module Datastoreid
       extend ActiveSupport::Concern
 
       included do
-        def delete
+        def destroy
           @gcloud_entity ||= self.class.datastore_entity
           if !@gcloud_entity.persisted? && id.present?
             @gcloud_entity.key = gcloud_key

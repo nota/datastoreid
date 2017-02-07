@@ -4,9 +4,10 @@ module Datastoreid
     extend ActiveSupport::Concern
 
     included do
-      class_attribute :properties
+      class_attribute :properties, :original_properties_names
 
       self.properties = {}
+      self.original_properties_names = {}
 
       property :id # Default property
 
@@ -40,7 +41,16 @@ module Datastoreid
 
       def add_property(name, options)
         properties[name] = options
+        original_properties_names[options[:as]] = name if options[:as]
         create_accessors(name)
+      end
+
+      def alias_property_name(name)
+        properties[name][:as]
+      end
+
+      def original_property_name(alias_name)
+        original_properties_names[alias_name]
       end
 
       # https://www.leighhalliday.com/ruby-metaprogramming-creating-methods
@@ -50,6 +60,11 @@ module Datastoreid
         end
         define_method("#{name}=") do |value| # Define set method
           instance_variable_set("@#{name}", value)
+        end
+
+        if alias_property_name(name)
+          alias_method(alias_property_name(name), name)
+          alias_method("#{alias_property_name(name)}=", "#{name}=")
         end
       end
     end

@@ -58,11 +58,10 @@ module Datastoreid
           # XXX: We can set EMULATOR_HOST only from environmental viriables so far
           ENV['DATASTORE_EMULATOR_HOST'] = settings['project']
         end
-        puts settings
 
-#        @datastore ||= Google::Cloud::Datastore.new(
-#          project: settings['project']
-#        )
+        @datastore ||= Google::Cloud::Datastore.new(
+          project: settings['project']
+        )
       end
 
       def datastore_entity

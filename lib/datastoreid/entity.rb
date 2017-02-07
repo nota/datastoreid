@@ -5,10 +5,12 @@ module Datastoreid
   module Entity
     extend ActiveSupport::Concern
 
-    include Criteria
     include Persistable
     include Properties
     include Validatable
+    include Selectable
+    include Findable
+    include Queryable
 
     include Entity::Initializable
 
@@ -35,7 +37,7 @@ module Datastoreid
       end
 
       def to_csv
-        values = to_gcloud.sort.to_h.values.map! do |v| 
+        values = to_gcloud.sort.to_h.values.map! do |v|
           if v.class == Time
             v.to_formatted_s(:db)
           else

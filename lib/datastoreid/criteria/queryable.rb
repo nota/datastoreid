@@ -17,6 +17,13 @@ module Datastoreid
       def fetch
         parent_entry.fetch(query)
       end
+
+      def each
+        @entries ||= fetch
+        @entries.each do |entry|
+          yield(entry)
+        end
+      end
     end
   end
 end

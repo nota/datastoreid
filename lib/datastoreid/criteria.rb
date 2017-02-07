@@ -12,6 +12,7 @@ module Datastoreid
   # can be chained in order to create a readable criterion to be executed
   # against the database.
   class Criteria
+    include Enumerable
     include Findable
     include Queryable
     include Selectable

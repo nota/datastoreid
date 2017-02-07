@@ -10,7 +10,11 @@ module Datastoreid
 
       def fetch_one(query)
         result = datastore.run query
-        new(result.first)
+        if result.count > 0
+          new(result.first)
+        else
+          nil
+        end
       end
 
       def fetch(query)

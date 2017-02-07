@@ -11,6 +11,7 @@ module Datastoreid
     include Selectable
     include Findable
     include Queryable
+    include Config
 
     include Entity::Initializable
 
@@ -58,7 +59,9 @@ module Datastoreid
           # XXX: We can set EMULATOR_HOST only from environmental viriables so far
           ENV['DATASTORE_EMULATOR_HOST'] = settings['project']
         end
-
+        puts "datastore set"
+        puts settings
+        puts settings['project']
         @datastore ||= Google::Cloud::Datastore.new(
           project: settings['project']
         )

@@ -37,8 +37,13 @@ module Datastoreid
             false
           end
         end
+
+        def save!
+          raise "Could not save" + errors.messages.to_s unless save
+#          raise Datastore::Errors::DatastoreError.new "Could not save" unless save
+        end
       end
-      
+
       class_methods do
         def before_save(method)
           before_save_methods << method

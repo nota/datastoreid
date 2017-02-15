@@ -5,7 +5,7 @@ module Datastoreid
 
     class_methods do
       def find(id_or_name)
-        result = query.find(kind, id_or_name)
+        result = datastore.find(kind, id_or_name)
         return new(result) if result
       end
 

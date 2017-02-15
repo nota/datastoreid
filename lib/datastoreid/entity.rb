@@ -70,8 +70,8 @@ module Datastoreid
 
       protected
 
-      def gcloud_key(id)
-        datastore.key(kind, id)
+      def gcloud_key(id_or_name)
+        datastore.key(kind, id_or_name)
       end
     end
   end

@@ -4,8 +4,9 @@ module Datastoreid
     extend ActiveSupport::Concern
 
     class_methods do
-      def find(id)
-        fetch_one query.where('__key__', '=', gcloud_key(id.to_i))
+      def find(id_or_name)
+        result = datastore.find(kind, id_or_name)
+        return new(result) if result
       end
 
       def find_by(criterion = nil)
